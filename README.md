@@ -17,6 +17,10 @@
 This is the order taking service with Java 17 and Spring Boot. This service works together with the notification, order processing and config services in a microservice architecture.
 ## Purpose
 This project is a demo for the Melita interview process, it's main purpose is to showcase microservice architecture design and Spring Cloud Config Client usage with RabbitMQ messaging.
+## Features
+- fetches Orders
+- publishes "OrderEvent" to RabbitMQ
+- persists Order to DB
 ## Service structure
 ```
 order-service/
@@ -36,7 +40,7 @@ Clone the repository from GitHub.
 git clone  https://github.com/Dzsodie/OrderService.git
 ```
 ## Starting the application
-Start the Config Service with the following command.
+Start the service with the following command.
 ```shell
 mvn spring-boot:run
 ```
