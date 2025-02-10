@@ -1,6 +1,8 @@
 package com.melita.OrderService.config;
 
 import com.melita.OrderService.security.JwtAuthenticationFilter;
+import lombok.Getter;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -40,5 +42,9 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    @Getter
+    @Value("${jwt.secret}")
+    private static String secret;
 }
 

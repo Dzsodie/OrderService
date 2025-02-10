@@ -19,36 +19,56 @@ This is the order taking service with Java 17 and Spring Boot. This service work
 This project is a demo for the Melita interview process, it's main purpose is to showcase microservice architecture design and Spring Cloud Config Client usage with RabbitMQ messaging.
 ## Features
 - fetches Orders
-- publishes "OrderEvent" to RabbitMQ
+- publishes OrderEvent (order.created) to RabbitMQ
 - persists Order to DB
 ## Service structure
-```
-order-service/
-├── src/main/java/com/melita/orderservice
-│   ├── controller/
-│   ├── service/
-│   ├── repository/
-│   ├── model/
-│   ├── event/
-│   ├── config/
-│   ├── security/
-├── src/test/java/com/melita/orderservice
-```
+    ```
+    order-service/
+    ├── src/main/java/com/melita/orderservice
+    │   │   ├── config/
+    │   │   ├── controller/
+    │   │   ├── event/
+    │   │   ├── model/
+    │   │   ├── repository/
+    │   │   ├── security/
+    │   │   ├── service/
+    │   │   ├── validator/ 
+    │   ├── resources/ 
+    │       ├── application.yml/ 
+    ├── src/test/java/com/melita/orderservice
+    ```
 ## Installation
-Clone the repository from GitHub.
-```shell
-git clone  https://github.com/Dzsodie/OrderService.git
-```
+1. Pre-requisites
+   Install RabbitMQ, Java17, PostgreSQL DB. Start the RabbitMQ server and test the DB connection.
+2. Clone the repository from GitHub.
+    ```shell
+    git clone  https://github.com/Dzsodie/OrderService.git
+    ```
 ## Starting the application
-Start the service with the following command.
-```shell
-mvn spring-boot:run
-```
+1. First start the Config Service https://github.com/Dzsodie/ConfigService.git .
+2. Then start the Auth Service https://github.com/Dzsodie/AuthService.git .
+3. Check if the properties are loaded from config service properly.
+   http://localhost:8888/OrderService/default
+4. Start the service with the following command.
+    ```shell
+    mvn spring-boot:run
+    ```
+5. Check if RabbitMQ exchange is started and contains the exchange and the queues.
+   http://localhost:15672/#/
 ## API documentation
 Swagger documentation is available at: http://localhost:8080/swagger/index.html after the application started successfully.
 ## Logging and monitoring
-
+SLF4J is used for logging.
+Log aggregation is not yet implemented, but Datadog offers an easy to implement solution with user-friendly monitoring interface.
 ## Testing
-
+1. Mockito and JUnit5 is used for the unit testing.
+2. Test coverage needs to be improved. Coverage report can be reached with this command.
+    ```shell
+    mvn jacoco:report
+    ```
+3. Tests can be run with the following command.
+    ```shell
+    mvn test
+    ```
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

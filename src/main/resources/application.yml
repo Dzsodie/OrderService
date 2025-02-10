@@ -1,11 +1,5 @@
 spring:
   application:
-    name: order-service
-  cloud:
-    config:
-      uri: http://localhost:8888  # Config Server URL
-  rabbitmq: # move to config file
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
+    name: notification-service
+  config:
+    import: "optional:configserver:"

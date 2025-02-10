@@ -1,6 +1,6 @@
 package com.melita.OrderService.model;
 
 public enum OrderStatus {
-    PENDING, APPROVED, REJECTED, COMPLETED
+    CREATED, PENDING, APPROVED, REJECTED, COMPLETED
 }
 
