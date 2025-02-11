@@ -7,23 +7,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.beans.factory.annotation.Value;
 
-@Getter
+
 @Configuration
 public class RabbitMQConfig {
 
+    @Getter
     @Value("${rabbitmq.exchange.name}")
     private static String exchangeName;
 
+    @Getter
     @Value("${rabbitmq.routing.key}")
-    private String routingKey;
+    private static String routingKey;
 
     @Bean
     public static TopicExchange exchange() {
         return new TopicExchange(exchangeName);
-    }
-
-    @Autowired
-    public RabbitMQConfig(@Value("${rabbitmq.routing.key}") String routingKey) {
-        this.routingKey = routingKey;
     }
 }

@@ -47,4 +47,3 @@ public class SecurityConfig {
     @Value("${jwt.secret}")
     private static String secret;
 }
-

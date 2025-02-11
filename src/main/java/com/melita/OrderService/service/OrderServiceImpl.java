@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class OrderServiceImpl {
+public class OrderServiceImpl implements OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderEventPublisher orderEventPublisher;
@@ -34,6 +34,7 @@ public class OrderServiceImpl {
         this.restTemplate = restTemplateBuilder.build();
     }
 
+    @Override
     public Order placeOrder(Order order) {
         order.setStatus(OrderStatus.PENDING);
         Order savedOrder = orderRepository.save(order);
@@ -41,6 +42,7 @@ public class OrderServiceImpl {
         return savedOrder;
     }
 
+    @Override
     public List<Order> fetchOrdersFromERP() {
         try {
             Order[] ordersArray = restTemplate.getForObject(
