@@ -14,15 +14,13 @@ import org.springframework.beans.factory.annotation.Value;
 public class RabbitMQConfig {
 
     @Value("${spring.messaging.order-processing.queue}")
-    private static String notificationQueue;
+    private String notificationQueue;
 
-    @Getter
     @Value("${spring.messaging.notification.exchange}")
-    private static String notificationExchange;
+    private String notificationExchange;
 
-    @Getter
     @Value("${spring.messaging.notification.routingKey}")
-    private static String notificationRoutingKey;
+    private String notificationRoutingKey;
 
     @Bean
     public Queue notificationQueue() {
