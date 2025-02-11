@@ -33,6 +33,7 @@ public class SecurityConfig {
 
         return http.build();
     }
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
@@ -42,9 +43,4 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    @Getter
-    @Value("${jwt.secret}")
-    private static String secret;
 }
-

@@ -19,6 +19,7 @@ This is the order taking service with Java 17 and Spring Boot. This service work
 This project is a demo for the Melita interview process, it's main purpose is to showcase microservice architecture design and Spring Cloud Config Client usage with RabbitMQ messaging.
 ## Features
 - fetches Orders
+- validates Order details
 - publishes OrderEvent (order.created) to RabbitMQ
 - persists Order to DB
 ## Service structure
@@ -35,6 +36,7 @@ This project is a demo for the Melita interview process, it's main purpose is to
     │   │   ├── validator/ 
     │   ├── resources/ 
     │       ├── application.yml/ 
+    │       ├── bootstrap.yml/ 
     ├── src/test/java/com/melita/orderservice
     ```
 ## Installation

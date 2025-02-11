@@ -1,8 +1,8 @@
 package com.melita.OrderService.event;
 
+import com.melita.OrderService.config.RabbitMQConfig;
 import com.melita.OrderService.model.Order;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 
@@ -10,18 +10,12 @@ import org.springframework.stereotype.Component;
 public class OrderEventPublisher {
 
     private final RabbitTemplate rabbitTemplate;
-    private final String exchangeName;
-    private final String routingKey;
 
-    public OrderEventPublisher(RabbitTemplate rabbitTemplate,
-                               @Value("${rabbitmq.exchange.name}") String exchangeName,
-                               @Value("${rabbitmq.routing.key}") String routingKey) {
+    public OrderEventPublisher(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
-        this.exchangeName = exchangeName;
-        this.routingKey = routingKey;
     }
 
     public void publishOrderCreatedEvent(Order order) {
-        rabbitTemplate.convertAndSend(exchangeName, routingKey, order);
+        rabbitTemplate.convertAndSend(RabbitMQConfig.getNotificationExchange(), RabbitMQConfig.getNotificationRoutingKey(), order);
     }
 }

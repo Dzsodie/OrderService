@@ -1,8 +1,10 @@
 package com.melita.OrderService.config;
 
 import lombok.Getter;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.TopicExchange;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,19 +13,29 @@ import org.springframework.beans.factory.annotation.Value;
 @Configuration
 public class RabbitMQConfig {
 
-    @Value("${rabbitmq.exchange.name}")
-    private static String exchangeName;
+    @Value("${spring.messaging.order-processing.queue}")
+    private static String notificationQueue;
 
-    @Value("${rabbitmq.routing.key}")
-    private String routingKey;
+    @Getter
+    @Value("${spring.messaging.notification.exchange}")
+    private static String notificationExchange;
+
+    @Getter
+    @Value("${spring.messaging.notification.routingKey}")
+    private static String notificationRoutingKey;
 
     @Bean
-    public static TopicExchange exchange() {
-        return new TopicExchange(exchangeName);
+    public Queue notificationQueue() {
+        return new Queue(notificationQueue, true);
     }
 
-    @Autowired
-    public RabbitMQConfig(@Value("${rabbitmq.routing.key}") String routingKey) {
-        this.routingKey = routingKey;
+    @Bean
+    public TopicExchange notificationExchange() {
+        return new TopicExchange(notificationExchange);
+    }
+
+    @Bean
+    public Binding notificationBinding(Queue notificationQueue, TopicExchange notificationExchange) {
+        return BindingBuilder.bind(notificationQueue).to(notificationExchange).with(notificationRoutingKey);
     }
 }
