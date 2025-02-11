@@ -13,13 +13,13 @@ import org.springframework.beans.factory.annotation.Value;
 @Configuration
 public class RabbitMQConfig {
 
-    @Value("${spring.messaging.order-processing.queue}")
+    @Value("${spring.messaging.order-processing.queue:defaultQueue}")
     private String notificationQueue;
 
-    @Value("${spring.messaging.notification.exchange}")
+    @Value("${spring.messaging.notification.exchange:defaultExchange}")
     private String notificationExchange;
 
-    @Value("${spring.messaging.notification.routingKey}")
+    @Value("${spring.messaging.notification.routingKey:defaultRoutingKey}")
     private String notificationRoutingKey;
 
     @Bean
