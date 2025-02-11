@@ -1,0 +1,177 @@
+{
+	"info": {
+		"_postman_id": "9017cc86-265f-4916-8e01-1a2c3d163a2d",
+		"name": "Melita Order System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "12055785"
+	},
+	"item": [
+		{
+			"name": "Approve Order",
+			"request": {
+				"auth": {
+					"type": "jwt",
+					"jwt": {
+						"secret": "my-very-secret-key",
+						"isSecretBase64Encoded": false,
+						"algorithm": "HS256",
+						"payload": "{}",
+						"addTokenTo": "header",
+						"headerPrefix": "Bearer",
+						"queryParamKey": "token",
+						"header": "{}"
+					}
+				},
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": "http://localhost:8084/api/orders/{orderId}/approve\n"
+			},
+			"response": []
+		},
+		{
+			"name": "Create Order",
+			"request": {
+				"auth": {
+					"type": "jwt",
+					"jwt": {
+						"secret": "my-very-secret-key",
+						"isSecretBase64Encoded": false,
+						"algorithm": "HS256",
+						"payload": "{}",
+						"addTokenTo": "header",
+						"headerPrefix": "Bearer",
+						"queryParamKey": "token",
+						"header": "{}"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"customerName\": \"John Doe\",\n  \"customerEmail\": \"john.doe@example.com\",\n  \"customerPhone\": \"+123456789\",\n  \"installationAddress\": \"123 Main Street, City\",\n  \"installationDate\": \"2025-02-12T10:00:00\",\n  \"timeSlot\": \"10:00-12:00\",\n  \"productTypes\": [\"Internet\", \"TV\"],\n  \"packageTypes\": [\"Premium\", \"Sports\"],\n  \"status\": \"PENDING\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8083/api/orders"
+			},
+			"response": []
+		},
+		{
+			"name": "Fetch Orders",
+			"request": {
+				"auth": {
+					"type": "jwt",
+					"jwt": {
+						"secret": "my-very-secret-key",
+						"isSecretBase64Encoded": false,
+						"algorithm": "HS256",
+						"payload": "{}",
+						"addTokenTo": "header",
+						"headerPrefix": "Bearer",
+						"queryParamKey": "token",
+						"header": "{}"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": "http://localhost:8083/api/orders/erp"
+			},
+			"response": []
+		},
+		{
+			"name": "Register User",
+			"request": {
+				"auth": {
+					"type": "jwt",
+					"jwt": {
+						"isSecretBase64Encoded": true,
+						"secret": "my-very-secret-key",
+						"algorithm": "HS256",
+						"payload": "{}",
+						"addTokenTo": "header",
+						"headerPrefix": "Bearer",
+						"queryParamKey": "token",
+						"header": "{}"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"adminUser\",\n    \"password\": \"secureAdminPassword\",\n    \"roles\": [\"ADMIN\"]\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/auth/register"
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"auth": {
+					"type": "jwt",
+					"jwt": {
+						"secret": "my-very-secret-key",
+						"isSecretBase64Encoded": false,
+						"algorithm": "HS256",
+						"payload": "{}",
+						"addTokenTo": "header",
+						"headerPrefix": "Bearer",
+						"queryParamKey": "token",
+						"header": "{}"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"testUser\",\n    \"password\": \"securePassword\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:8081/auth/login"
+			},
+			"response": []
+		}
+	]
+}
